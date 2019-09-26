@@ -1,0 +1,332 @@
+\documentclass{article}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=28mm,
+ right=28mm,
+ top=28mm,
+ bottom=20mm,
+ }
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\cfoot{\thepage}
+\rhead{Bittor Alana}
+
+\newtheorem*{lemma}{Claim}
+\title{Topics in Modern Geometry - Final Assessment}
+\author{Bittor Alana}
+\date{November 2018}
+\newcommand{\Tau}{\mathcal{T}}
+\newcommand{\polring}{\mathbb{C}[x_1,...,x_n]}
+\begin{document}
+
+\maketitle
+
+\section*{Part I: topology and affine varieties}
+\subsection*{Exercise 1}
+\subsubsection*{(a)}
+\begin{lemma}
+Let $(X,\Tau)$ be a compact topological space, and let $Y$ be any closed set of $X$. Prove that $Y$ with the subspace topology $\Tau_Y$ is compact.
+\end{lemma}
+\begin{proof}
+May $\mathcal{U}\subseteq \Tau_Y$ be a collection of open sets of $Y$ that cover $Y$. Then, as $Y$ is closed in $X$, we have that $X\setminus Y$ is open, as it is the complementary of a closed set, and we have that every open $U\in \mathcal{U}$ is of the form $V_U\cap Y$ with $V_U\in\Tau$ for being the subspace topology. Therefore, $X=(X\setminus Y)\bigcup\limits_{U\in\mathcal{U}}V_U$. We have a collection of open subsets that covers $X$, therefore, as $X$ is compact, we have a finite cover:
+
+$X = (X\setminus Y)\bigcup\limits_{i=1}^m V_{U_i}$. Thus, as $Y\subseteq X$ and no element of $Y$ is in $X\setminus Y$, we have that $Y\subseteq\bigcup\limits_{i=1}^m V_{U_i}$, and intersecting those $V$'s with $Y$ we get that $Y\subseteq\bigcup\limits_{i=1}^mU_i$, having found a finite subcollection of $\mathcal{U}$ such that $Y=\bigcup\limits_{i=1}^m U_i$ (note that $\supseteq$ is trivial as every $U$ is in $Y$).
+\end{proof}
+
+\subsubsection*{(b)}
+\begin{lemma}
+Prove that $Spec(\mathbb{C}[x_1,...,x_n])$ is compact.
+\end{lemma}
+\begin{proof}
+For notation simplicity, we are going to call $X=Spec(\polring)$
+Let $\{U_\alpha\}_{alpha\in\Gamma}$ be a cover of open sets of $X$. We know that these open sets, in the Zariski topology, are the complementary sets of the closed sets $V_I$. Therefore, we have
+\[X=\bigcup _{\alpha\in\Gamma}U_\alpha=\bigcup_{\alpha\in\Gamma}X\setminus V_{I_\alpha}=X\setminus\bigcap_ {\alpha\in\Gamma}V_{I_\alpha} \iff \bigcap_{\alpha\in\Gamma}V_{I_\alpha}=\emptyset\]
+
+Proceeding as in the lecture notes in Lecture 2, we know that \[\bigcap_{\alpha\in\Gamma}V_{I_\alpha}=V_J,\:\:\: J:= \sum_{\alpha\in\Gamma}I_\alpha\]
+
+Thus we have that $V_J=\emptyset$. Now, if $J\neq \polring$, then there would be a maximal (and therefore prime) ideal $M$ containing $J$, which would mean that $M\in V_J$, but that can't be true as $V_J=\emptyset$. Therefore, $J=\polring$, which means that $1\in J$. Hence $1$ can be written as a finite sum of elements belonging to a finite number of ideals in our collection, that is:
+
+\[\exists\:\: \alpha_1,...,\alpha_m\in\Gamma \And \: \forall 1\leq j\leq m\:\: \exists i_j\in I_{\alpha_j}\ :\:\:\: i_1+...+i_m=1     \]
+
+Therefore
+\[\sum_{j=1}^m I_{\alpha_j}=\polring \Longrightarrow V_K = \emptyset,\:\: K:= \sum_{j=1}^m I_{\alpha_j} \]
+
+And thus
+
+\[V_K=\bigcap_{j=1}^m V_{I_{\alpha_j}}=\emptyset\Longrightarrow X\setminus\bigcap_{j=1}^m V_{I_{\alpha_j}}=\bigcup_{j=1}^m U_{\alpha_j}=X  \]
+
+So we have found a finite subcollection of open sets of the original collection such that they cover the whole space, and thus $Spec(\polring)$ is a compact space with the Zariski topology.
+\end{proof}
+
+
+\subsection*{Exercise 2}
+\subsubsection*{(a)}
+\begin{lemma}
+Fix $f\in\mathbb{C}[x_1,...,x_n]$. Find an isomorphism $\mathds{A}^n\rightarrow G_f$, and prove that it is an isomorphism.
+\end{lemma}
+\begin{proof}
+Let $\Phi : \mathds{A}^n\rightarrow G_f$, $(x_1,...,x_n)\mapsto (x_1,...,x_n,f(x_1,...,x_n))$. First of all, it is obvious that $\Phi_i$ is a polynomial $\forall 1\leq i\leq n +1$. 
+
+It is trivial to see that $\Phi$ is an injection as $x\neq x'\Rightarrow x_i\neq x'_i$ for some $1\leq i\leq n$ which means $\Phi_i(x)\neq\Phi_i(x')\Rightarrow \Phi (x)\neq\Phi (x')$.
+
+Due to the definition of $G_f$, it is also obvious that $\Phi$ is surjective, as for any element $x\in G_f$ we have that $x_{n+1}=f(x_1,...,x_n)$, and so $x=\Phi (x_1,...,x_n)$.
+
+The inverse of $\Phi$ consists on projecting the first $n$ elements of the points of $G_f$, and so it is trivial to see:
+\[(\Phi \circ \Pi_{x_1,...,x_n})(x_1,...,x_n,f(x))=(x_1,...,x_n,f(x))\]
+\[(\Pi_{x_1,...,x_n}\circ\Phi)(x_1,...,x_n) = (x_1,...,x_n)\]
+
+Trivially, the projection is a morphism, with a polynomial in each component ($\Pi_i(x)=x_i$). And therefore we have found an isomorphism between $\mathds{A}^n$ and $G_f$.
+\end{proof}
+
+\subsubsection*{(b)}
+\begin{lemma}
+Show that it does not hold true for rational functions $F$.
+\end{lemma}
+\begin{proof}
+Let $F(x)=\frac{1}{x}\in\mathbb{C}(x)$. We now have that $G_F=\{(x,\frac{1}{x}):x\in\mathbb{C}\}$. But then this graph is the affine variety of a hyperbola: $G_F=\{xy=1\}$. Therefore, if $G_F$ were isomorphic to $\mathds{A}^1$, then there would be an isomorphism between their coordinate rings, which are $\mathbb{C}[x,x^{-1}]$ and $\mathbb{C}[x]$, respectively. If there were such a ring isomorphism $f$, we would have that $f(xx^{-1})=f(x)f(x^{-1})=1$, and thus $f(x)$ would be a unit of $C[x]$, which is only possible if it is a constant, so $f(x)=c\in\mathbb{C}$. But then, $f(c)=f(c*1)=c*f(1)=c$. We would have therefore found two different polynomials mapping to the same polynomial by $f$, contradicting the fact that $f$ was a ring isomorphism. Therefore $G_F$ and $\mathds{A}^1$ are not isomorphic either.
+\end{proof}
+
+\subsection*{Exercise 3}
+Let $J=(x^2y,x-z-1)\leq\mathbb{C}[x,y,z]$ and $W=\mathds{V}(J)$.
+\subsubsection*{(a)}
+Let's find $a,b\in\mathbb{C}$ such that $f(x,y,z)=(x-2)(x-z)+x^2(y+1)+5x-2z+3$ is equal in $\mathbb{C}[W]$ to $x^2+ax+b$.
+
+We know by Prop 1.2 in Lecture 6 that $\mathbb{C}[W] = \frac{\mathbb{C}[x,y,z]}{\mathds{I}(W)}$.
+
+Thus, by expanding the expression of $f$, we get \[x^2-xz-2x+2z+x^2y+x^2+5x-2z+3\]. Now we will regroup the first two terms:
+\[x(x-z)+3x+x^2y+x^2+3\]
+Considering that in $\mathds{I}(W)$ $x^2y=0$ and $x-z=1$, we obtain that in $\mathbb{C}[W]$ $f$ maps into 
+\[x^2+4x+3\]
+
+\subsubsection*{(b)}
+We want to decompose $W$ in two irreducible varieties irredundantly. For that purpose, we consider the two cases when $x^2y=0$. Either $x=0$, in which case we are dealing with points which fulfill $z+1=0$, or $y=0$, for which $x-z-1=0$. Therefore, we have $W=\mathds{V}(x,z+1)\cup\mathds{V}(y,x-z-1)=:W_1\cup W_2$.
+Now let's check that $W_1$ is not a subvariety of $W_2$ and vice versa:
+\[(0,1,-1)\in W_1\setminus W_2\Rightarrow W_1\nsubseteq W_2\]
+\[(1,0,0)\in W_2\setminus W_1\Rightarrow W_2\nsubseteq W_1\]
+
+We still need to prove that $W_1,W_2$ are indeed irreducible.
+
+Firstly, we have that that $\mathds{I}(\mathds{V}(x,z+1))=(x,z+1)$ and $\mathds{I}(\mathds{V}(y,x-z-1))=(y,x-z-1)$, as both are radical ideals.
+
+$\frac{\mathbb{C}[x,y,z]}{(x,z+1)}\cong\mathbb{C}[y]$, as $x$ vanishes and $z$ takes a constant value. And $\mathbb{C}[y]$ is a domain, so $(x,z+1)=\mathds{I}(W_1)$ is a prime ideal, which means that $W_1$ is an irreducible variety.
+
+$\frac{\mathbb{C}[x,y,z]}{(x,x-z-1)}\cong\mathbb{C}[x]$, as $y$ vanishes and $z$ is written in terms of $x$ and constants. As $\mathbb{C}[x]$ is a domain, we again deduce that $W_2$ is irreducible.
+
+
+\subsubsection*{(c)}
+From the expression of \textbf{(a)} it is obvious that $f$ is not constant on $W$, as it corresponds to a parabola. However, in the irreducible component $W_1=\mathds{V}(x,z+1)$, as we have that $x=0$, we get $f(x,y,z)=3$, which is clearly constant.
+
+\subsection*{Exercise 4}
+We are going to decompose $X=\mathds{V}(y^2-xz,z^2-y^3)\subset\mathds{A}^3$ into irreducible components irredundantly.
+
+If either $y$ or $z$ vanishes then the other one does too. If they are both zero, we have the subvariety $\mathds{V}(y,z)$. 
+
+Now we assume $y$ and $z$ to be nonzero. \[z^2=y^3,\:\: y^2-xz=0\Longrightarrow y^4=x^2z^2=x^2y^3\stackrel{y\neq0}{\Longrightarrow} y=x^2\]
+Now, as $z^2-y^3=0$, we have that $z=\pm\sqrt{y^3}=\pm\sqrt{x^6}=\pm x^3$. But in order to $y^2-xz=0$ be fulfilled when $y-x^2=0$, it has to be $z=x^3$.
+
+Therefore we have \[X=\mathds{V}(y,z)\cup\mathds{V}(y-x^2,z-x^3):=X_1\cup X_2\]
+
+Now let's prove that both subvarieties are birationally equivalent to $\mathds{A}^1$.
+
+We define:
+\[\Phi_1: X_1\longrightarrow\mathds{A}^1,\:\:\Phi_1(x,0,0)=x,\hspace{2cm} \Psi_1: \mathds{A}^1 \longrightarrow X_1,\:\: \Psi_1(t)=(t,0,0)\]
+\[\Phi_2: X_2\longrightarrow\mathds{A}^1,\:\:\Phi_2(x,x^2,x^3)=x,\hspace{2cm} \Psi_2: \mathds{A}^1 \longrightarrow X_2,\:\: \Psi_2(t)=(t,t^2,t^3)\]
+
+They are all rational maps as each component of each function is a polynomial on the input variables. Checking the conditions is quite straightforward:
+
+\[(\Phi_1\circ\Psi_1)(t)=\Phi_1(t,0,0)=t,\hspace{15mm}(\Psi_1\circ\Phi_1)(x,0,0)=\Psi_1(x)=(x,0,0)  \]
+\[(\Phi_2\circ\Psi_2)(t)=\Phi_2(t,t^2,t^3)=t,\hspace{15mm}(\Psi_2\circ\Phi_2)(x,x^2,x^3)=\Psi_2(x)=(x,x^2,x^3)  \]
+
+Therefore the rational maps $\Phi_i$ and $\Psi_i$ are inverse to each other, and thus $X_1$ and $X_2$ are birationally equivalent to $\mathds{A^1}$
+
+\textbf{Note:} When taking the square root of a complex number $c$, as there are exactly two numbers $a$ fulfilling $a^2=c$, we can define $\sqrt{.}$ to map $c$ to the one solution which has a smaller argument in the interval $[-\pi,\pi)$.
+
+
+
+
+\subsection*{Exercise 5}
+Let $X\subseteq\mathds{A}^m_{x_1,...,x_m}$ and $Y\subseteq\mathds{A}^n_{y_1,...,y_n}$ be irreducible varieties. Let $Z=X\times Y\subseteq\mathds{A}^{m+n}$.
+\subsubsection*{(a)}
+\begin{lemma}
+$Z$ is an affine variety.
+\end{lemma}
+\begin{proof}
+A point $z\in Z$ fulfills $(z_1,...,z_m)\in X$ and $(z_{m+1},...,z_{m+n})\in Y$. Thus, $(z_1,...,z_m)$ vanishes all the polynomials generating $X$ and $(z_{m+1},...,z_{m+n})$ vanishes all the polynomials generating $Y$.
+
+We can now take the projections 
+\[\Pi_X : \mathds{A}^{m+n}\rightarrow\mathds{A}^m, (z_1,...,z_{m+n})\mapsto (z_1,...,z_m)  \]
+\[\Pi_Y : \mathds{A}^{m+n}\rightarrow\mathds{A}^n, (z_1,...,z_{m+n})\mapsto (z_{m+1},...,z_{m+n}) \]
+
+We can assume that $X$ and $Y$ are generated by finitely generated ideals because $\mathbb{C}[x_1,...,x_l]$ is Noetherian for any natural $l$. Thus, calling those finitely generated ideals $I_X=(f_1,...,f_{r_X}), I_Y=(g_1,...,g_{r_Y})$, we write
+
+\[K = \{ f_i\circ \Pi_X : 1\leq i\leq r_X\} \cup \{ g_j\circ\Pi_Y:1\leq j\leq r_Y   \} \subset \mathbb{C}[z_1,...,z_{m+n}]\].
+It remains to check that $Z=\mathds{V}((K))$. A point belongs in $Z$ if and only if its first $m$ components vanish all the generating polynomials of $I_X$ and its last $n$ components vanish all the generating polynomials of $I_Y$, and thus $Z$ is an affine variety given by the polynomials of the ideal generated by the elements of $K$.
+\end{proof}
+
+\subsubsection*{(b)}
+\begin{lemma}
+If $X$ and $Y$ are irreducible, $Z$ is irreducible.
+\end{lemma}
+\begin{proof}
+Let $X$ and $Y$ be irreducible, and suppose $Z=Z_1\cup Z_2$ for two varieties $Z_1,Z_2$ such that $Z_1\subsetneq Z$, $Z_2\subsetneq Z$.
+
+For $y\in Y$, we define $X_y=X\times\{y\}$. We have that, as $Y$ is irreducible, $X_y$ is irreducible as well, as it is homeomorphic with the product topology to $X$. Thus, as $X_y=(Z_1\cap X_y)\cup(Z_2\cap X_y)$, and it is irreducible, we have that either $X_y\subseteq Z_1$ or $X_y\subseteq Z_2$. 
+
+We now define $Y_1=\{y\in Y\colon X_y\subseteq Z_1 \}, Y_2=\{y\in Y\colon X_y\subseteq Z_2 \}$
+
+We have that $Y=Y_1\cup Y_2$, and $Y$ is irreducible, so either $Y=Y_1$ or $Y=Y_2$.
+\newline\newline
+\noindent If $Y=Y_1$
+\[X\times Y=\bigcup_{y\in Y}X_y=Z_1  \]
+If $Y=Y_2$
+\[X\times Y=\bigcup_{y\in Y}X_y=Z_2  \]
+In both cases we get a contradiction, as neither of the $Z_i$ can contain the whole space $Z$.
+\end{proof}
+
+\section*{Part II: topology and affine varieties}
+\subsection*{Exercise 6}
+We will analyse the projective closure, points at infinity and singular points of:
+\subsubsection*{(a)} 
+
+$2x^2y^2=x^2+y^2$\newline\newline
+
+First we get a homogenised polynomial where all terms have degree four:
+\[f(x,y,z)=2x^2y^2-x^2z^2-y^2z^2\]
+
+Thus the projective closure is given by $X=\mathds{V}(f)\subseteq\mathds{P}^n$.
+
+The points at infinity correspond to \[X\cap\{z=0\}=\mathds{V}(2x^2y^2)\cap\mathds{V}(z)=\{(0:1:0),(1:0:0)\}\]
+
+Let's analyse singularities:
+\newline\newline
+$\frac{\partial f}{\partial x}=4xy^2-2xz^2\:\: (1)\hspace{2cm} \frac{\partial f}{\partial y}=4x^2y-2yz^2\:\: (2)\hspace{2cm}\frac{\partial f}{\partial z}=-2z(x^2+y^2) \:\:(3)$
+\newline\newline
+To vanish $(3)$ either $z=0$ or $x=\pm iy$.
+\begin{itemize}
+    \item $z=0\Longrightarrow$ $4xy^2=0$ and $4x^2y=0 \Longrightarrow (0:1:0),(1:0:0)\in Sing(X)$ (it is trivial to check they belong in $X$).
+    \item $x=\pm iy\Longrightarrow 4iy^3-2iyz^2=0$ and $-4y^3-2yz^2$. If we multiply the first equation by $i$ and add both equations, we get $y^3=0\Rightarrow y=0$, thus yielding the singularity $(0:0:1)\in Sing(X)$
+\end{itemize}
+
+Therefore $Sing(X)=\{(1:0:0),(0:1:0),(0:0:1)\}$
+
+\subsubsection*{(b)}
+$y^2=x^4+4ax+3\:\:\: a\in\mathbb{C}$
+\newline\newline
+We proceed similarly to \textbf{(a)}. First, we define:
+$g(x,y,z)=y^2z^2-x^4-4axz^3-3z^4$
+Hence the projective closure of the variety is given by $Y=\mathds{V}(g)$.
+
+The points at infinity are determined by $z=0$, where we get
+
+\[g(x,y,0)=x^4\Longrightarrow x=0 \Longrightarrow Y\cap\{z=0\}=\{(0:1:0)\}\]
+
+So the only point at infinity is $(0:1:0)$.
+
+We now analyse the singularities:
+
+\[\frac{\partial g}{\partial x}=-4x^3-4az^3\hspace{2cm}   \frac{\partial g}{\partial y}=2yz^2   \hspace{2cm}\frac{\partial g}{\partial x}=2y^2z-12axz^2-12z^3\]
+
+The second equation forces either $y$ or $z$ to be zero:
+\begin{itemize}
+    \item $y=0\Longrightarrow x^3+az^3=0$ and $z^2(ax+z)=0$. $z$ being zero would force $x$ being zero, leading to the origin, which is not a projective point. Thus $x=-a^{1/3}z$ and $-ax=z$ have to stand, which if $a=0$ yields the origin and otherwise it yields $z=a^{4/3}z$. Therefore, $a=\pm 1$ will yield singular points.
+    \item $z=0\Longrightarrow x=0$. Thus $(0:1:0)\in Sing(Y)$
+\end{itemize}
+Therefore, if $a=1$, then $Sing(Y)=\{(-1:0:1),(0:1:0)\}$. If $a=-1$, then $Sing(Y)=\{(1:0:1),(0:1:0)\}$. If not, $Sing(Y)=\{(0:1:0)\}$
+
+\subsection*{Exercise 7}
+\begin{lemma}
+Let $X=\mathds{V}(f)\subset\mathds{P}^n$ be a projective hypersurface defined by a nonconstant homogeneous polynomial $f\in\mathbb{C}[x_0,...,x_n]$ and let $L\subset\mathds{P}^n$ be a projective line (i.e. $L$ is defined by $n-1$ linearly independent homogeneous polynomials of degree 1). Then $X\cap L\neq\emptyset$
+\end{lemma}
+\begin{proof}
+$L$ is determined by a system of linearly independent equations of the form \[a_{i0}x_0+...+a_{in}x_n=0\hspace{1cm} 1\leq i\leq n-1\]
+
+We then have the matrix $A\in\mathfrak{M}_{(n-1)\times(n+1)}$ such that $A_{ij}=a_{ij}\hspace{3mm} 1\leq i\leq n-1,0\leq j\leq n$. Considering the linear transformation that $A$ describes from $\mathbb{C}^{n+1}$ to $\mathbb{C}^{n-1}$, and bearing in mind that $A$ has rank $n-1$ because its rows are linearly independent, we get: \[dim(kerA)=n+1-rank(A)=n+1-(n-1)=2\:\:\:  \cite{ranknullity}\]
+Thus we know there are two linearly independent vectors $u,v\in\mathbb{C}^{n+1}$ such that $\forall \mu,\lambda\in\mathbb{C}: \mu u+\lambda v \in L$
+\newline\newline
+Therefore, the points of the intersection $L\cap X$ are given by the zeroes of $g(\mu,\lambda):=f(\mu u+\lambda v)$, which is a homogeneous polynomial in two variables. 
+
+
+$f$ being nonconstant and homogeneous means it does not have a constant term. Therefore, as $g(\mu,\lambda)=f(\mu u+\lambda v)$, we have that each of $g's$ monomials have degree $d>0$. Thus, our $g$ is a nonconstant homogeneous polynomial. 
+
+But every nonconstant homogeneous polynomial in two variables can be factored in linear homogeneous terms, as proved in \cite{stackexchange}:
+
+Let $q(x,y)$ be a homogeneous polynomial in two variables of degree $d>0$. We can assume $q$ is not divisible by $y$, as otherwise we can just analyse $q(x,y)=y^kq(x,y)'$ where $q'$ is not divisible by $y$ and is a homogeneous polynomial of degree $d-k$. Note that if $d==k$ we are over, and otherwise we are in the case of our assumption. Now we write
+\[q(x,y)=\sum _{i=0}^da_{i}x^iy^{d-i}=y^d\sum _{i=0}^da_i(\frac xy)^i\stackrel{(*)}{=}y^d\prod_{i=1}^d (\alpha_i(\frac xy)+\beta_i)=\prod_{i=1}^d (\alpha_ix+\beta_iy)\]
+$(*)$: Apply the Fundamental Theorem of Algebra to the polynomial over the one variable $\frac{x}{y}$.
+
+Hence, this result together with the fact that $g(\mu,\lambda)$ is a nonconstant two-variable homogeneous polynomial helps us conclude that there is at least a linear factor $\alpha\mu+\beta\lambda$ with $(\alpha,\beta)\neq(0,0)$.
+
+Thus there exists a pair $(\mu_0,\lambda_0)$ such that $\alpha\mu_0+\beta\lambda_0=0$, and it turns out $\mu_0u+\lambda_0v\in X\cap L$, as $(\mu_0,\lambda_0)$ is a root of $g(\mu,\lambda)$ and $A(\mu_0u+\lambda_0v)=0$
+
+\end{proof}
+
+\subsection*{Exercise 8}
+Let $C=\mathds{V}(f(x,y))\subset\mathds{A}^2$ be the affine curve given by the equation
+\[f(x,y)=(x^2-3)^2+(y^2-3)^2-8\]
+\subsubsection*{(a)}
+Let's check $(1,1)$ is a nonsingular point of $C$.
+$\triangledown f = (4x(x^2-3),4y(y^2-3))$
+\[\triangledown f \mid_{(1,1)}=(-8,-8)\neq(0,0)\]
+\[f(1,1)=(-2)^2+(-2)^2-8=8-8=0\]
+Thus $(1,1)$ is a nonsingular point of $C$.
+
+\subsubsection*{(b)}
+We now rewrite $f$ as
+\[f(x,y)=(x-1)^4+4(x-1)^3-8(x-1)+(y-1)^4+4(y-1)^3-8(y-1)\]
+\\\\
+Let's prove that the rational function $\Phi(x,y)=\frac{y-1}{x-1}$ is regular at $(1,1)$ and find the value at that point.
+
+We are looking for two polynomials $p(x,y),q(x,y)$ such that $\frac{y-1}{x-1}\sim\frac{p(x,y)}{q(x,y)}$, so we need $p$ and $q$ to be such that $(y-1)q(x,y)-(x-1)p(x,y)\in \mathds{I}(C)$. 
+
+We have that in points of $C$ \[f(x,y)=(x-1)^4+4(x-1)^3-8(x-1)+(y-1)^4+4(y-1)^3-8(y-1)=0\]
+\[\Longrightarrow (x-1)\left[(x-1)^3+4(x-1)^2-8\right]=-(y-1)\left[(y-1)^3+4(y-1)^2-8 \right] \]
+
+Therefore, if we choose $p(x,y)=(x-1)^3+4(x-1)^2-8$ and $q(x,y)=-p(y,0)$, we have that indeed $(y-q)q(x,y)-(x-q)p(x,y)\in\mathds{I}(C)$.
+
+Thus we can safely say that $\phi$ is regular at $(1,1)$ now, as we have found an expression which is in the same equivalence class and whose denominator is nonzero in $(1,1)$: $q(1,1)=-p(1,0)=-(-8)=8$. We conclude then that $\phi(1,1)=\frac{p(1,1)}{q(1,1)}=\frac{-8}{8}=-1$
+
+\subsubsection*{(c)}
+
+
+\subsection*{Exercise 9}
+\begin{lemma}
+Suppose that $p_1,...,p_6$ are the vertices of a hexagon $H$ drawn inside a conic $C\subset\mathds{P}^2$, with edges $E_1=\overline{p_1p_2}$, $E_2=\overline{p_2p_3}$,\dots, $E_6=\overline{p_6p_1}$. Then the three points $q_1,q_2,q_3$ are collinear, where $q_i=E_i\cap E_{i+3}$ is
+the intersection point for a pair of opposite sides of H.
+\end{lemma}
+
+\begin{proof}
+First, we define two cubic curves containing all the $p_i$ points and the $q_j$ points.
+
+We can take $C_1=E_1\cup E_3 \cup E_5$ and $C_2=E_2\cup E_4\cup E_6$. First of all, as each of the edges is a line, we have that each line is given by an equation $ax+by+cz=0$. Thus, each $C_i$, as the union of three of those lines, is the variety given by the zero locus of the product of three equations like that, thus being a cubic curve.
+
+Secondly, we have that $p_1,p_2\in E_1$, $p_3,p_4\in E_3$, $p_5,p_6\in E_5$, $q_1\in E_1$, $q_2\in E_5$ and $q_3\in E_3$. Thus $\{p_1,p_2,p_3,p_4,p_5,p_6,q_1,q_2,q_3\}\subset C_1$. Furthermore, as $p_1,p_6\in E_6$, $p_2,p_3\in E_2$, $p_4,p_5\in E_4$, and $q_1\in E_4$, $q_2\in E_2$, $q_3\in E_6$, it follows that $\{p_1,p_2,p_3,p_4,p_5,p_6,q_1,q_2,q_3\}\subset C_2$.
+
+Thus $C_1$ and $C_2$ are two cubic curves that intersect at those 9 distinct points. Therefore, by the Cayley-Bacharach theorem, if we take the cubic curve $C\cup\overline{q_1q_2}$ \---which contains $p_1,\dots,p_6,q_1$ and $q_2$\--- then it must contain the ninth point $q_3$. Thus we have that $q_3\in C\cup\overline{q_1q_2}$. As $q_3$ cannot lie on $C$, we have that $q_3\in\overline{q_1q_2}$, and so $q_1,q_2$ and $q_3$ are collinear.
+
+Note that $C$ is also a cubic curve as it is given by the product of a conic's expression (which is a homogeneous polynomial of degree two) and a line of the form $ax+by+cz=0$.
+\end{proof}
+
+\begin{thebibliography}{}
+
+\bibitem{ranknullity}
+Rank-nullity theorem
+%\\\texttt{http://en.wikipedia.org/wiki/Rank-nullity_theorem}
+
+\bibitem{stackexchange} 
+Stack Exchange Query
+\\\texttt{https://math.stackexchange.com/questions/1463537/do-polynomials-in-two-variables-}
+\texttt{always-factor-in-linear-terms}
+
+\end{thebibliography}
+
+\end{document}

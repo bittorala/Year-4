@@ -1,0 +1,68 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\newtheorem*{lemma}{Claim}
+\newtheorem*{note}{Note}
+\author{Bittor Alaña}
+\title{Topics in Modern Geometry: Homework 1}
+\begin{document}
+
+\maketitle
+
+\section*{4th exercise}
+\begin{lemma}
+If $X$ has property \textbf{T2}, then $X$ has property \textbf{T1}.  
+\end{lemma}
+
+\begin{proof}
+Let $X$ be a topological space with property \textbf{T2}. In order to see that $X$ is \textbf{T1}, let's take an arbitrary $x\in X$. We're going to see that $X\setminus \{ x \}$ is an open set, which will conclude that any singleton $\{ x\}$ with $x\in X$ is a closed set. 
+
+Let $y$ be in $X\setminus \{ x \}$, that is to say, $y\neq x$. Thus, as $X$ is \textbf{T2}, there exist open sets $U,V \subseteq X$ such that $x\in U$, $y\in V$, and $U \cap V = \emptyset$. 
+
+Trivially, $V\subseteq X$. Besides, $x\notin V$, because otherwise $x$ would be in $U$ and $V$, but $U \cap V = \emptyset$. Therefore, $V\subseteq X\setminus \{ x \}$. This means we have found an open set $V$ which contains $y$ and is contained in $X\setminus \{ x \}$, which means that $X\setminus \{ x \}$ is a neighbourhood of any arbitrary point of itself. Thus $X\setminus \{ x \}$ is open, and that means $\{ x \}$ is a closed set.
+\end{proof}
+
+\section*{5th exercise}
+\begin{lemma}
+Any metric space has property \textbf{T2}
+\end{lemma}
+
+\begin{proof}
+Let $(X,d)$ be a metric space. Let's see it has the \textit{Hausdorff} property.
+Let $x,y\in X$ be two different points $(x \neq y)$. As they are different, $d(x,y) > 0$. 
+Let's call $r:=\frac{d(x,y)}{2}>0$. We are going to call $U:=B_r(x)$  and $V:=B_r(y)$. 
+
+To see that $U\cap V=\emptyset$, let's suppose there was an element in the intersection. If $z\in U\cap V$, that means:
+\begin{enumerate}
+\item $z\in U\Rightarrow d(x,z) < r$
+\item $z\in V\Rightarrow d(z,y) < r$
+\end{enumerate} 
+Using the triangular inequality ($(X,d)$ is a metric space), these two inequalities and the definition of $r$,
+\[d(x,y) \leq d(x,z) + d(z,y) < r + r = d(x,y) \]
+We have concluded that $d(x,y)<d(x,y)$, which is clearly contradictory. Thus, we conclude that no such $z$ exists, and we have found open sets $U$ and $V$ respectively containing $x$ and $y$ and with empty intersection.
+\end{proof}
+
+\section*{6th exercise}
+\begin{lemma}
+Let $(P,\leq )$ be a partially ordered set, considered as a topological space with the order topology. Prove that, if $P$ has property \textbf{T2}, then $x\leq y\Rightarrow x=y$.
+\end{lemma}
+\begin{proof}
+Let $x,y\in P$, $x\leq y$, and let's suppose $x\neq y$. Then, as $P$ has property \textbf{T2}, there exist $U,V\subseteq P$ such that $x\in U$, $y\in V$ and $U\cap V=\emptyset$. We can assume that $U$ and $V$ are basic opens (if two opens that satisfy that exist, then we can take any of the basic opens which contain the point of the opens). Thus, we can write the following:
+\[U=P \setminus (C_{x_1}\cup ...\cup C_{x_r})\]
+\[V=P \setminus (C_{y_1}\cup ...\cup C_{y_l})\]
+Thus, since $y\in V$, $y\notin C_{y_1}\cup ...\cup C_{y_l}$, which means $y_j\nleq y \hspace{5mm}\forall 1\leq j\leq l$.
+However, this means that $x\in V$. If it wasn't so, $x$ would have to satisfy that
+\[\exists i_0 \in \{ 1,...,l \}\: s.t. \: x\in C_{y_{i_0}} \Rightarrow y_{i_0}\leq x\]
+But our hypothesis says that $x\leq y$, and thus $y_{i_0}\leq x\leq y$, and so $y\in C_{y_{i_0}}$, which would mean $y\notin V$, which is an evident contradiction.
+
+Therefore, necessarily $x\in V$, which means $\{ x\} \subseteq U\cap V$, but this intersection was meant to be empty. This contradiction tells us that there are no such $x,y$ in $P$, and that, effectively, in our \textit{Hausdorff} space $P$, $x\leq y \Rightarrow x=y$.
+\end{proof}
+
+\begin{note}
+Another way of putting this without using so much reduction to the absurd, is seeing that if the element $y$ belongs to a basic open, then necessarily $x$ belongs to it too, due to the transitivity argument we have exposed. Therefore, as $P$ is \textit{Hausdorff}, and $x$ is inside any basic open set including $y$, necessarily they are the same element.
+\end{note}
+\end{document}

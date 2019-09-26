@@ -1,0 +1,85 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Wenneker Article
+% LaTeX Template
+% Version 2.0 (28/2/17)
+%
+% This template was downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Authors:
+% Vel (vel@LaTeXTemplates.com)
+% Frits Wenneker
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+% Adapted for COMS30007 by Carl Henrik Ek
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[10pt, a4paper, twocolumn]{article} % 10pt font size (11 and 12 also possible), A4 paper (letterpaper for US letter) and two column layout (remove for one column)
+
+\input{preamble.tex} % Specifies the document structure and loads requires packages
+
+\usepackage{lipsum}
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{Models} % The article title
+
+\author{
+	\authorstyle{Jane Doe\textsuperscript{1} and John Doe\textsuperscript{2}} % Authors
+	\newline\newline % Space before institutions
+	\textsuperscript{1}\institution{candidate number (5 digits)}\\ % Institution 1
+	\textsuperscript{2}\institution{candidate number (5 digits)} % Institution 2
+}
+
+
+\date{\today} % Add a date here if you would like one to appear underneath the title block, use \today for the current date, leave empty for no date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title
+
+\thispagestyle{firstpage} % Apply the page style for the first page (no headers and footers)
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT
+%----------------------------------------------------------------------------------------
+\lettrineabstract{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce maximus nisi ligula. Morbi laoreet ex ligula, vitae lobortis purus mattis vel. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec ac metus ut turpis mollis placerat et nec enim. Duis tristique nibh maximus faucibus facilisis. Praesent in consequat leo. Maecenas condimentum ex rhoncus, elementum diam vel, malesuada ante.}
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+\section{The Prior}
+The seminal work \citeauthor{Reference1} published in \citeyear{Laplace:1814vc} a process that allows to produce excellent cheese is described. The paper \citetitle{chicken2007} generalises this work on cheese by extending it also to the poultry scenario. However, this analysis have recieved critique by several prominent academics such as \citeauthor{xkcd} in \cite{xkcd}.
+
+\lipsum[1-2]
+
+\section{Posterior}
+
+\begin{align}
+  f &\sim \mathcal{N}\left(\boldsymbol{0},\beta^{-1}\mathbf{I}\right)\\
+  \beta &\sim \Gamma(a)
+\end{align}
+
+\section{Evidence}
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+\printbibliography[title={Bibliography}] % Print the bibliography, section title in curly brackets
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

@@ -1,0 +1,23 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\author{Bittor Alaña}
+\begin{document}
+
+$\mathcal{C}=\mathds{V}(y^2z-x^3-axz^2-bz^3)\subset\mathds{P}^2$
+
+By simple calculations we deduce that the tangent line through $p$ is $z=0$ and that $\mathcal{C}$ is nonsingular iff $(a,b)\neq(0,0)$. 
+
+We are interested in drawing the lines that go through $p=(0:1:0)$ and seeing when those lines intersect $\mathcal{C}$ with multiplicity 2, to get tangent lines. 
+
+The lines that go through $p$ are parameterised by $rx+tz=0$, with $(r,t)\neq(0,0)$. We have already found the line $z=0$ so we are interested in cases where $r\neq0$. We can then assume $r=1$, and analyse the lines of the form $x+tz=0$. We then have $x=-tz$, and we can plug that expression into the polynomial generating $\mathcal{C}$.
+
+We have that $t^3z^3+atz^3-bz^3+y^2=z[z^2(t^3+at-b)+y^2]=0$
+We want this expression to show points with double multiplicity, which is achieved when $y=\pm i|z|\sqrt{t^3+at-b}$ and $t^3+at-b=0$, which yields that $(-t:0:1)$ is a point on $\mathds{V}(x+tz)\cap\mathcal{C}$ of multiplicity two, and so the line {V}(x+tz) is a tangent to $\mathcal{C}$ that passes through $p$ for each solution $t$.
+
+If we had that the polynomial $t^3+at-b$ always has 3 \textbf{different} roots then we would have finished. However, this is not always the case, for example if $a=-3,b=2$, it has a double root and we are only able to find two different tangent lines apart from $\mathds{V}(z)$
+\end{document}

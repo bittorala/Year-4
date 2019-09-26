@@ -1,0 +1,29 @@
+Question 1.1: Pages 140-141, and Section 1.5.5. 
+Noise.
+Choosing Gaussian likelihood also implies that a Gaussian prior would result in a Gaussian posterior.
+
+Question 1.2: As it is a diagonal matrix, it means the variables don't depend on each other. As all the elements in the diagonal are the same, all of the variables have the same covariance.
+That is, this corresponds to identically distributed independent random variables.
+
+Question 2:
+
+Question 3: N(WX,sigma^2*I) for some sigma
+
+Question 4: Lecture 3 notes, wikipedia.
+The conjugate distributions allow us to know what kind of distribution the posterior will be, thus making it easier to interpret the results of the likelihood*prior product.
+
+Question 5: Square of Euclidean distance between x and mu (squared loss)
+
+Question 6: Develop (1/Z)*p(Y|X,W)p(W) = (1/Z)*N(WX,sigma^2)*p(W)
+
+Question 7: See 120-121
+
+Question 8:
+
+Question 9:
+
+Question 10:
+
+Question 11:
+
+

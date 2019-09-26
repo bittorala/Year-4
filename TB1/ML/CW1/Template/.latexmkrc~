@@ -1,0 +1,4 @@
+@default_files = ("dynamic_dirichlet_deep_gp.tex");
+
+$pdf_mode = 1;
+$pdflatex="lualatex --shell-escape --file-line-error --interaction=nonstopmode %O %S";

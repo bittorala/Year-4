@@ -1,0 +1,11 @@
+q17
+y=wx+epsilon
+the x's are gaussians, a linear mapping of gaussians is gaussian
+that means p(y|w)=N()
+the mean is (expected value) E[y]=E[wx+epsilon]=E[wx]=0 due to our choice of x
+(its distribution has mean zero)
+The covariance is E[yy^t]=E[(wx+eps)(wx+eps)^t]=E[wxx^tw]+E[eps*eps^t] the 2nd term
+is sigma^2*I, and x*x^t is the identity apparently
+so the upper expresssion is ww^t+sigma^2*I
+
+q19

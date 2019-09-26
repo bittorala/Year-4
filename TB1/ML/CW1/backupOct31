@@ -1,0 +1,200 @@
+
+\documentclass[10pt, a4paper]{article} % 10pt font size (11 and 12 also possible), A4 paper (letterpaper for US letter) and two column layout (remove for one column)
+
+\input{preamble.tex} % Specifies the document structure and loads requires packages
+
+\usepackage{lipsum}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\newcommand{\w}{\textbf{W}}
+\newcommand{\x}{\textbf{X}}
+\newcommand{\y}{\textbf{Y}}
+\newcommand{\btheta}{\boldsymbol{\theta}}
+%----------------------------------------------------------------------------------------
+%	ARTICLE INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{Modelling} % The article title
+
+\author{
+	\authorstyle{Bittor Alana \textsuperscript{1}, Alessandro Scibetta\textsuperscript{2} and Stefan Losty\textsuperscript{3}} % Authors
+	\newline\newline % Space before institutions
+	\textsuperscript{1}\institution{candidate number 97016}\\ % Institution 1
+	\textsuperscript{2}\institution{candidate number 38352} % Institution 2
+}
+
+
+\date{\today} % Add a date here if you would like one to appear underneath the title block, use \today for the current date, leave empty for no date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title
+
+\thispagestyle{firstpage} % Apply the page style for the first page (no headers and footers)
+
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+\section{The Prior}
+\subsection{Theory}
+\subsubsection*{Question 1}
+
+\begin{enumerate}
+  \item The Gaussian likelihood function is chosen as it is used to encode a normally distributed noise function, as well as encoding the assumption that all observations are conditionally independent. 
+  \newline
+  \item Choosing a spherical co-variance matrix for the likelihood implies that the likelihood has circular probability distribution. This comes as a result of the co-variance matrix being a scalar multiple of the identity matrix, indicating that there is 0 co-variance across each dimension thus each dimension is independent and all dimensions have equal variance. In the non-spherical case, there are two further possibilities; firstly, the co-variance matrix may be still be a diagonal matrix, in this instance there would still be 0 co-variance across each dimension, indicating independence however the likelihood would not have a circular probability distribution as each dimension would have a different variance. In the case where the co-variance matrix is not diagonal, this would show some degree of co-variance across dimensions, indicating a lack of independence. 
+  \end{enumerate}
+
+\subsubsection*{Question 2}
+	\[ p(\textbf{Y}|f,\textbf{X})=p(\textbf{y}_1,...,\textbf{y}_n|f,\textbf{X})\]
+	We are now going to apply the product rule successively. As we know that $p(A,B|C)=p(A|C)p(B|A,C)$, we can use this recursively and get:
+	\[p(\textbf{y}_1,...,\textbf{y}_n|f,\textbf{X})=p(\textbf{y}_1|f,\textbf{X})p(\textbf{y}_2,...,\textbf{y}_n|f,\textbf{X},\textbf{y}_1)=\]
+\[	=p(\textbf{y}_1|f,\textbf{X})p(\textbf{y}_2|f,\textbf{X},\textbf{y}_1)p(\textbf{y}_3,...,\textbf{y}_n|f,\textbf{X},\textbf{y}_1,\textbf{y}_2)=\]
+	\[{\displaystyle ...=p(\textbf{y}_1|f,\textbf{X})\prod_{j=2}^n p(\textbf{y}_j|f,\textbf{X},\textbf{y}_1,...,\textbf{y}_{j-1}) }\]
+	
+\subsubsection{Linear Regression}
+\subsubsection*{Question 3}
+\[	{\displaystyle p(\textbf{Y}|\textbf{X},\textbf{W})= \prod_{i=1}^n \mathcal{N}(\textbf{y}_i|\textbf{W}\textbf{x}_i,\sigma ^ 2 \textbf{I})}\]
+
+\subsubsection*{Question 4}
+From Bayes Rule:
+\[p(\textbf{w}|D) = \frac{p(D|\textbf{w})p(\textbf{w})}{p(D)}\]
+This implies:
+\[Posterior \propto Likelihood * Prior\]
+As a result of the above relationship, conjugate distributions dictate that the posterior distribution will have the same functional form as the product of the likelihood and prior distributions. Conjugacy therefore, allows one to formulate the posterior distribution by determining the functional form of the product of the likelihood and prior. Finding the posterior distribution in this way is often far easier than mechanically calculating it via Bayes' rule, which will often involve integration when calculating the evidence term.
+
+\subsubsection*{Question 5}
+The distance between $x$ and $\mu$ in a Gaussian distribution is called the Mahalanobis distance ($\Delta$), and is given by:
+\newline
+\[\Delta = (x-\mu)^T\Sigma^{-1}(x-\mu)\]
+\newline\newline
+Therefore, if $\boldsymbol{\Sigma}=\sigma^2\textbf{I}$, we have that $\boldsymbol{\Sigma}^{-1}=\frac{1}{\sigma^2}\textbf{I}$, and thus we can write this distance as $\frac{1}{\sigma^2}(x-\mu)^T(x-\mu)$, which is the square of the Euclidean distance scaled by $\frac{1}{\sigma^2}$. A spherical co-variance matrix $\boldsymbol{\Sigma}=\sigma^2\textbf{I}$ encodes a Euclidean distance scaled by $\frac{1}{\sigma}$.
+
+% Should i cite the Gaussian Identities document in this answer?
+\subsubsection*{Question 6}
+As shown previously in question 3, we have a Gaussian likelihood function: 
+\[	{\displaystyle p(\textbf{Y}|\textbf{X},\textbf{W})= \prod_{i=1}^n \mathcal{N}(\textbf{y}_i|\textbf{W}\textbf{x}_i,\sigma ^ 2 \textbf{I})}\]
+
+\noindent and a Gaussian prior over parameters \textbf{W}:
+\[  {\displaystyle p(\textbf{W}) = \mathcal{N}({\textbf{W}_0},\tau^2\textbf{I})}\]
+
+\noindent We know that Gaussians self conjugate and so the posterior function must also be a Gaussian:
+\begin{align*}
+    p(\w|\x,\y) &\propto p(\y|\x,\w)p(\w)\\
+    &\propto -\frac{1}{2\sigma^2}(\y-\x\w)^\textbf{T}(\y-\x\w)-\frac{1}{2{\tau^2}}\w^\textbf{T}\w\\
+     &= -\frac{1}{2\sigma^2}\y^T\y+\frac{1}{\sigma^2}\y^T(\x\w)-\frac{1}{2\sigma^2}(\x\w)^T(\x\w)-\frac{1}{2{\tau^2}}\w^\textbf{T}\w\\
+\end{align*}
+
+\noindent Using the term that is quadratic in \textbf{W};
+\begin{align*}
+   A &= -\frac{1}{2\sigma^2}(\x\w)^T(\x\w)-\frac{1}{2{\tau^2}}\w^\textbf{T}\w\\
+   A &= -\frac{1}{2\sigma^2}\x^T\w^T(\x\w)-\frac{1}{2{\tau^2}}\w^\textbf{T}\w\\
+   A &= -\frac{1}{2}\w^T(\frac{1}{\sigma^2}\x^T \x\frac{1}{2{\tau^2}})\w\\
+\end{align*}
+
+\noindent From this the covariance matrix of the posterior can be found:
+\begin{equation*}
+    \textbf{S}^{-1} = (\frac{1}{\sigma^2}\x^T \x+\frac{1}{2{\tau^2}})
+\end{equation*}
+
+\noindent The mean can be found using the term linear in \textbf{W}:
+\begin{equation*}
+B = \frac{1}{\sigma^2}\y^T(\x\w) = \frac{1}{\sigma^2}\w^T \x^T \y
+\end{equation*}
+\newpage
+\noindent Comparing this with the general exponent of a Gaussian and solving for mean $\boldsymbol{\mu}$:
+\begin{align*}
+    \textbf{X}^{T}\mathbf{\Sigma}^{-1}\boldsymbol{\mu} &= \frac{1}{\sigma^2} \w^T \x^T \y\\
+    \w^{T}\textbf{S}^{-1}{\textbf{M}} &= \w^{T}(\frac{1}{\sigma^2}\x^{T}\x+\frac{1}{2{\tau^2}})\boldsymbol{\mu} = \frac{1}{\sigma^2}\w^{T}\x^{T}\y\\
+    &\rightarrow{(\frac{1}{\sigma^2}\x^{T}\x+\frac{1}{2{\tau^2}})\boldsymbol{\mu}} = \frac{1}{\sigma^2}\x^{T}\y\\
+    &\rightarrow \boldsymbol{\mu} = \frac{1}{\sigma^2}(\frac{1}{\sigma^2}\x^{T}\x+\frac{1}{2{\tau^2}})^{-1} \x^{T}\y
+\end{align*}
+\noindent Therefore the final expression for the posterior over $\w$ is given by:
+\begin{equation}
+    p(\w|\x,\y) = \mathcal{N}(\w|\frac{1}{\sigma^2}(\frac{1}{\sigma^2}\x^{T}\x+\frac{1}{2{\tau^2}})^{-1} \x^{T}\y, (\frac{1}{\sigma^2}\x^T \x+\frac{1}{2{\tau^2}})^{-1})
+\end{equation}
+\subsubsection{Non-parametric Regression}
+
+%cite lecture notes slide 33 22/10/2018 - Gaussian Processes and Unsupervised Learning
+%also slide 10 29/10/2018 - Dirichlet Processes 
+\subsubsection*{Question 7}
+If a model ($M$) of some data ($Y$) is defined as being a conditional distribution parametrised by some $\theta$ from a parameter space $\mathcal{T}$ such that:
+\begin{equation}
+    M = \{P(Y|\theta)|\theta \in \mathcal{T}\}
+\end{equation}
+If this parameter space $\mathcal{T}$ is a finite dimensional space, the model is parametric. If $\mathcal{T}$ is an infinite-dimensional space, the model is said to be non-parametric. In a parametric model, the number of parameters remains constant with respect to sample size however, in a non-parametric model, the number of parameters grows with the sample size, this can be thought of as the function gaining degrees of freedom as it sees more data.  \\
+%representation of data?
+
+\subsubsection*{Question 8}
+The prior represents the probability of a function $\mathcal{f}$ conditioned by \x and some parameter $\theta$ of the kernel function. This is a Gaussian distribution, with mean 0 and a covariance matrix determined by a kernel function. This kernel function, which is parametrised by $\theta$, gives us the covariance matrix where $\Sigma_{ij}=k(x_i,x_j)$, and it encodes generalisation properties of the GP model. Different choices of the kernel could encode an assumption of what our space of functions roughly looks like. For example, the 'smoothness' or 'wiggliness' that the functions in the space have.
+
+\subsubsection*{Question 9}
+ The prior must encode all possible functions as if this were not the case, it would be possible that some functions in the probability space would exhibit a probability of 0.
+ 
+ \subsubsection*{Question 10}
+ We can write a compact expression for the joint distribution if we consider the dependence relationships between the variables.
+
+ \[p(\y,\x,f,\btheta)=p(\y|f,\x,\btheta)p(f|\x,\btheta)p(\btheta|\x)p(\x) \stackrel{1,2,3}{=} p(\y|f)p(f|\x,\btheta)p(\btheta)p(\x)   \]
+ This graphical model is the following:
+ 
+ 
+ \begin{enumerate}
+     \item Each $\textbf{y}_n$ depends solely on the $f_n$ value and the noise.
+     \item Each $f_n$ value depends on the point $x_n$, the parameter $\btheta$ which affects its distribution, and also on other $f_j$ values, as their distribution has a certain covariance given by the kernel function.
+     \item $\btheta$ and \x\:\:have no dependence relations between each other.
+ \end{enumerate}
+
+\subsubsection*{Question 12}
+We generate some data using the $\textbf{W}$ parameters and adding a $\mathcal{N}(\epsilon|0,0.03)$ noise.
+Then, as explained in !!!![cite lecturenotes4 here], we get the following likelihood:
+\[p(y|\w,\x)=\mathcal{N}(y|\w^T \x,0.03)\]
+Thus, having a Gaussian likelihood, we will now choose a conjugate prior. We take a Gaussian prior, so that the posterior will also result in a Gaussian. We then assume, quite arbitrarily, that our prior is $p(\w)\sim \mathcal{N}((0,0),I)$.
+
+We can now visualize our prior, as in Figure 1:
+\begin{figure}
+  \includegraphics[width=5cm]{output_6_0.png}
+  \centering
+  \caption{Visualization of the prior}
+\end{figure}
+
+We then add one point and update the posterior, with the new information. This is how the posterior now looks:
+%add posterior's visualization
+
+The mean values of $p(\w)$ are going to give us the line that we are looking for. Figure 2 shows what they look like when adding three data points:
+
+\begin{figure}
+  \includegraphics[width=12cm]{lines.png}
+  \centering
+  \caption{Lines with different mean values of $\w$}
+\end{figure}
+
+We can observe that the more points we add, the more our lines look like the $\w$ we generated the points with. This is 
+
+\subsubsection*{Question 17}
+Instead of computing the whole integral, which could be a tricky process, we can try and calculate the parameters that define $p(Y)$.
+
+We have written $\y$ as a linear mapping of Gaussians plus another Gaussian, thus we can say for sure it is another Gaussian. Therefore, knowing its mean and covariance will suffice to determine the marginalisation:
+\[E[\y]=E[\w\x+\epsilon]=E[\w\x]+E[\epsilon]=E[\w\x]=0 \]
+Bearing in mind that $\epsilon$ has mean zero, and that the elements of $\x$ also have mean zero, and we are taking a linear combination of them, the linearity of the expected value operator gives us that $E[\w\x]=0$ and so the mean of $p(Y)$ is also zero.
+\[E[\y\y^T]=E[(\w\x + \epsilon)(\w\x + \epsilon)^T] = 
+E[\w\x\x^T\w^T] + E[\epsilon\epsilon^T]\]
+We know the second term of the sum is $\sigma^2 \textbf{I}$. The linearity of the expected value operator allows us to get the \w and $\w^T$ out, and we know $E[\x\x^T]=\textbf{I}$, as the $\textbf{x}$'s covariance is $\textbf{I}$, thus we get the expression \[E[\y\y^T]=\w\w^T+\sigma^2\textbf{I}\]
+
+Therefore, $p(\y)\sim \mathcal{N}(0,\w\w^T+\sigma^2\textbf{I})$
+
+
+\section{Evidence}
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+\printbibliography[title={Bibliography}] % Print the bibliography, section title in curly brackets
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

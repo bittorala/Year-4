@@ -1,0 +1,30 @@
+digraph {
+node [shape=plaintext, fontname=Courier, fontsize=12]
+0 [label="?-knows(_3458,_3460)"];
+1 [label=":-student_of(_3460,_3458)"];
+0 -> 1;
+2 [label=":-true"];
+1 -> 2;
+3 [label="Answer:\nknows(peter,paul)", shape=ellipse, style=dotted, fontsize=10];
+2 -> 3 [style=dotted, arrowhead=none];
+4 [label=":-friend_of(_3460,_3458)"];
+0 -> 4;
+5 [label=":-true"];
+4 -> 5;
+6 [label="Answer:\nknows(jan,peter)", shape=ellipse, style=dotted, fontsize=10];
+5 -> 6 [style=dotted, arrowhead=none];
+7 [label=":-friend_of(_3756,_3458),\nknows(_3756,_3460)"];
+0 -> 7;
+8 [label=":-knows(peter,_3460)"];
+7 -> 8;
+9 [label=":-student_of(_3460,peter)"];
+8 -> 9;
+10 [label=":-true"];
+9 -> 10;
+11 [label="Answer:\nknows(jan,paul)", shape=ellipse, style=dotted, fontsize=10];
+10 -> 11 [style=dotted, arrowhead=none];
+12 [label=":-friend_of(_3460,peter)"];
+8 -> 12;
+13 [label=":-friend_of(_3924,peter),\nknows(_3924,_3460)"];
+8 -> 13;
+}
