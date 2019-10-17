@@ -1,3 +1,6 @@
 [submodule "TB1/CC/GameOfLife"]
 	path = TB1/CC/GameOfLife
 	url = https://lo18144@bitbucket.org/kupmanyu/game-of-life.git
+[submodule "TB1/CC/Game_of_life/GameOfLife"]
+	path = TB1/CC/Game_of_life/GameOfLife
+	url = https://lo18144@bitbucket.org/kupmanyu/game-of-life.git
